@@ -11,14 +11,14 @@ public class DFS {
 
     public boolean[] visited;
     public Graph graph;
-    private List<Integer> order;
-    private int[] parent;
+    private final List<Integer> order;
+    private final int[] parent;
 
     public  DFS (Graph g) {
         this.graph = g;
-        this.visited = new boolean[g.V];
+        this.visited = new boolean[Graph.V];
         order = new ArrayList<>();
-        this.parent = new int[g.V];
+        this.parent = new int[Graph.V];
         Arrays.fill(parent, -1);
     }
 
@@ -37,7 +37,7 @@ public class DFS {
 
         if  (neighbours != null) {
             for (Integer v : neighbours) {
-                if (v < 0 || v>= graph.V) {continue;}
+                if (v < 0 || v>= Graph.V) {continue;}
                 if (!visited[v]) {
                     parent[v] = u;
                     dfs(v);

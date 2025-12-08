@@ -1,7 +1,7 @@
 import algs.Bridges;
 import graph.Graph;
 import algs.DFS;
-import graph.GraphGenerator;
+import graph.*;
 import utils.Logger;
 import utils.Reader;
 

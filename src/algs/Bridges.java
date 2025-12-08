@@ -7,7 +7,7 @@ import utils.Logger;
 public class Bridges {
 
     private int time;
-    private List<String> bridges;
+    private final List<String> bridges;
 
     public Bridges () {
         this.time = 0;
@@ -15,7 +15,7 @@ public class Bridges {
     }
 
     public void findBridges(Graph g) {
-        int V = g.V;
+        int V = Graph.V;
         boolean[] visited = new boolean[V];
         int[] disc = new int[V];
         int[] low =  new int[V];
