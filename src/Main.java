@@ -2,10 +2,15 @@ import algs.Bridges;
 import graph.Graph;
 import algs.DFS;
 import graph.GraphGenerator;
+import utils.Logger;
+import utils.Reader;
 
 public class Main {
     public static void main(String[] args) {
-        Graph G = GraphGenerator.graphGenerator(20,25); //Альтернатива: Graph G = new Graph(6); G.addEdge(0, 1); и т.д.
+
+        Logger.clearLog();
+        Logger.info("Начало программы.");
+        Graph G = Reader.readGraph("graph.txt");
         Bridges b = new Bridges();
 
         System.out.println("Список смежности:");

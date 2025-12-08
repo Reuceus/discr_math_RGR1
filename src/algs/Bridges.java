@@ -2,6 +2,7 @@ package algs;
 
 import  java.util.*;
 import graph.*;
+import utils.Logger;
 
 public class Bridges {
 
@@ -34,6 +35,8 @@ public class Bridges {
                 System.out.println(edge);
             }
         }
+
+        Logger.logBridges(bridges);
     }
 
     private void dfs(int u, boolean[] visited, int[] disc, int[] low, int[] parent, Graph g) {

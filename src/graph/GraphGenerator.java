@@ -1,4 +1,6 @@
 package graph;
+import utils.Logger;
+
 import java.util.*;
 
 public class GraphGenerator {
@@ -21,6 +23,7 @@ public class GraphGenerator {
             }
         }
 
+        Logger.info("Граф успешно сгенерирован.");
         return G;
     }
 }

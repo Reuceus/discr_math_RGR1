@@ -1,6 +1,7 @@
 package algs;
 
 import graph.Graph;
+import utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public class DFS {
 
     public void run(int start) {
         dfs(start);
+        Logger.logDFSResults(visited, parent);
     }
 
     private void dfs(int u) {
@@ -31,6 +33,7 @@ public class DFS {
         List<Integer> neighbours = graph.adj.get(u);
 
         System.out.println("Проходим " + u);
+        Logger.info("Посещаю вершину " + u);
 
         if  (neighbours != null) {
             for (Integer v : neighbours) {
