@@ -8,7 +8,7 @@ public class GraphGenerator {
     public static Graph graphGenerator(int V, int E) {
         Graph G = new Graph(V);
         Random rand = new Random();
-        Set<String> edges = new  HashSet<>();
+        Set<String> edges = new HashSet<>();
 
         while (edges.size() < E){
             int u  = rand.nextInt(V);
@@ -25,5 +25,27 @@ public class GraphGenerator {
 
         Logger.info("Граф успешно сгенерирован.");
         return G;
+    }
+
+    public static Digraph digraphGenerator(int V, int E) {
+        Digraph D = new Digraph(V);
+        Random rand = new Random();
+        Set<String> edges = new HashSet<>();
+
+        while (edges.size() < E) {
+            int u = rand.nextInt(V);
+            int v = rand.nextInt(V);
+
+            if (u != v) {
+                String edge = Math.min(u, v) + "-" + Math.max(u, v);
+                if (!edges.contains(edge)) {
+                    edges.add(edge);
+                    D.addEdge(u, v);
+                }
+            }
+        }
+
+        Logger.info("Граф успешно сгенерирован.");
+        return D;
     }
 }

@@ -15,7 +15,7 @@ public class Bridges {
     }
 
     public void findBridges(Graph g) {
-        int V = Graph.V;
+        int V = g.V;
         boolean[] visited = new boolean[V];
         int[] disc = new int[V];
         int[] low =  new int[V];

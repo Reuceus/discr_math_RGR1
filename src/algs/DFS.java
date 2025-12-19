@@ -11,14 +11,14 @@ public class DFS {
 
     public boolean[] visited;
     public Graph graph;
-    private final List<Integer> order;
-    private final int[] parent;
+    protected final List<Integer> order;
+    protected int[] parent;
 
     public  DFS (Graph g) {
         this.graph = g;
-        this.visited = new boolean[Graph.V];
+        this.visited = new boolean[g.V];
         order = new ArrayList<>();
-        this.parent = new int[Graph.V];
+        this.parent = new int[g.V];
         Arrays.fill(parent, -1);
     }
 
@@ -27,7 +27,7 @@ public class DFS {
         Logger.logDFSResults(visited, parent);
     }
 
-    private void dfs(int u) {
+    protected void dfs(int u) {
         visited[u] = true;
         order.add(u);
         List<Integer> neighbours = graph.adj.get(u);
