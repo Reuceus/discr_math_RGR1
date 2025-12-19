@@ -1,20 +1,17 @@
 import algs.Bridges;
-import graph.Graph;
 import algs.DFS;
 import algs.TopologicalSearch; // ДОБАВЛЕНО
 import graph.*;
 import utils.Logger;
 import utils.Reader;
 
-import graph.*;
-
 public class Main {
     public static void main(String[] args) {
 
+        Graph graph = Reader.readGraph("graph.txt");
         Logger.clearLog();
         Logger.info("Начало программы.");
         Graph G = GraphGenerator.graphGenerator(20, 19);
-        Bridges b = new Bridges();
 
         System.out.println("Список смежности:");
         for (int i = 0; i < G.V; i++) {
@@ -25,7 +22,6 @@ public class Main {
         DFS dfs = new DFS(G);
         dfs.run(0);
         dfs.getResults();
-        b.findBridges(G);
 
         Digraph g1 = GraphGenerator.digraphGenerator(20, 19);
 

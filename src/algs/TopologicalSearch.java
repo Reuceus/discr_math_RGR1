@@ -7,9 +7,9 @@ import java.util.*;
 public class TopologicalSearch extends DFS {
 
     private boolean[] inStack;
-    private List<Integer> sorted;
+    private final List<Integer> sorted;
     private boolean hasCycle;
-    private List<Integer> cyclePath;
+    private final List<Integer> cyclePath;
 
     public TopologicalSearch(Digraph digraph) {
         super(digraph);
@@ -73,8 +73,6 @@ public class TopologicalSearch extends DFS {
         inStack[u] = true;
 
         Logger.debug("Вход в вершину " + u + " (добавляю в стек)");
-        Logger.debug("Стек: " + getStackString());
-
         // Получаем соседей через метод графа
         Iterable<Integer> neighbours = graph.adj.get(u);
 
@@ -120,8 +118,6 @@ public class TopologicalSearch extends DFS {
 
         Logger.debug("Выход из вершины " + u + " (убираю из стека, добавляю в результат)");
         Logger.debug("Текущий результат (в обратном порядке): " + sorted);
-        Logger.debug("Стек после выхода: " + getStackString());
-
         return true;
     }
 
@@ -201,16 +197,6 @@ public class TopologicalSearch extends DFS {
         }
     }
 
-    private String getStackString() {
-        List<Integer> stack = new ArrayList<>();
-        for (int i = 0; i < inStack.length; i++) {
-            if (inStack[i]) {
-                stack.add(i);
-            }
-        }
-        return stack.toString();
-    }
-
     public void printResult() {
         List<Integer> result = sort();
 
@@ -220,12 +206,6 @@ public class TopologicalSearch extends DFS {
             System.out.println("Граф содержит цикл!");
             if (!cyclePath.isEmpty()) {
                 System.out.print("Обнаруженный цикл: ");
-                for (int i = 0; i < cyclePath.size(); i++) {
-                    System.out.print(cyclePath.get(i));
-                    if (i < cyclePath.size() - 1) {
-                        System.out.print(" → ");
-                    }
-                }
                 System.out.println();
             }
         } else {
@@ -233,7 +213,6 @@ public class TopologicalSearch extends DFS {
 
             // Дополнительная информация
             System.out.println("\nДополнительная информация:");
-            System.out.println("Посещённые вершины: " + getVisitedString());
             System.out.println("Родительские связи:");
             boolean hasParents = false;
             for (int i = 0; i < parent.length; i++) {
@@ -248,72 +227,11 @@ public class TopologicalSearch extends DFS {
         }
     }
 
-    private String getVisitedString() {
-        List<Integer> visitedList = new ArrayList<>();
-        for (int i = 0; i < visited.length; i++) {
-            if (visited[i]) {
-                visitedList.add(i);
-            }
-        }
-        return visitedList.toString();
-    }
-
     public boolean hasCycle() {
         return hasCycle;
     }
 
     public List<Integer> getCycle() {
         return new ArrayList<>(cyclePath);
-    }
-
-    public List<Integer> quickSort() {
-        // Временное отключение подробного логирования
-        boolean oldDebug = Logger.isDebugEnabled();
-        Logger.setDebugEnabled(false);
-
-        List<Integer> result = sort();
-
-        // Восстанавливаем настройки логирования
-        Logger.setDebugEnabled(oldDebug);
-
-        return result;
-    }
-
-    /**
-     * Проверяет, является ли данный граф DAG (Directed Acyclic Graph)
-     */
-    public boolean isDAG() {
-        return !hasCycle();
-    }
-
-    /**
-     * Возвращает список источников (вершин с нулевой входящей степенью)
-     * в топологическом порядке
-     */
-    public List<Integer> getSourcesInOrder() {
-        List<Integer> result = sort();
-        if (hasCycle) return Collections.emptyList();
-
-        List<Integer> sources = new ArrayList<>();
-        for (int vertex : result) {
-            // Проверяем, является ли вершина источником
-            boolean isSource = true;
-            for (int u = 0; u < graph.V; u++) {
-                Iterable<Integer> neighbours = graph.adj.get(u);
-                if (neighbours != null) {
-                    for (int v : neighbours) {
-                        if (v == vertex) {
-                            isSource = false;
-                            break;
-                        }
-                    }
-                }
-                if (!isSource) break;
-            }
-            if (isSource) {
-                sources.add(vertex);
-            }
-        }
-        return sources;
     }
 }
